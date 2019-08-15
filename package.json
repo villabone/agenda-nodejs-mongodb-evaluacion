@@ -1,0 +1,26 @@
+{
+  "name": "evaluacion-reto-agenda",
+  "version": "1.0.0",
+  "description": "agenda con nodejs y mongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/villabone/agenda-nodejs-mongodb-evaluacion.git"
+  },
+  "author": "jose villabona",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/villabone/agenda-nodejs-mongodb-evaluacion/issues"
+  },
+  "homepage": "https://github.com/villabone/agenda-nodejs-mongodb-evaluacion#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "express-session": "^1.16.2",
+    "mongodb": "^3.3.0",
+    "mongoose": "^5.6.9"
+  }
+}
