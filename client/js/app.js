@@ -1,10 +1,11 @@
 
 class EventManager {
     constructor() {
-        this.urlBase = "/events"
+        this.urlBase = "events"
         this.obtenerDataInicial()
         this.inicializarFormulario()
         this.guardarEvento()
+        this.cerrarSesion()
     }
 
     obtenerDataInicial() {
@@ -18,6 +19,7 @@ class EventManager {
         let eventId = evento.id
         $.post('/events/delete/'+eventId, {id: eventId}, (response) => {
             alert(response)
+            window.location.href = "http://localhost:3000/main.html"
         })
     }
 
@@ -54,6 +56,21 @@ class EventManager {
             }
         })
     }
+    cerrarSesion() {
+        $('#logout_div').on('click', (ev) => {
+          ev.preventDefault()
+          let url = this.urlBase + "/logout"
+          $.post(url, "", (response) => {
+            if (response == "Adios!") {
+              console.log("Sesion destruida con exito!")
+              window.location.href = "http://localhost:3000/index.html"
+            } else {
+              alert(response)
+            }
+          })
+    
+        })
+      }
 
     inicializarFormulario() {
         $('#start_date, #titulo, #end_date').val('');
@@ -117,6 +134,27 @@ class EventManager {
                 }
             })
         }
+        actualizarEvento(fecha) {
+
+            let start = moment(fecha.start).format('YYYY-MM-DD HH:mm:ss'),
+              end = moment(fecha.end).format('YYYY-MM-DD HH:mm:ss'),
+              id = fecha.eventId,
+              title = fecha.title,
+              upEvento = {
+                eventId: id,
+                titulo: title,
+                fechaInicio: start,
+                fechaFin: end,
+              };
+        
+            $.post(this.urlBase + '/upEvento', upEvento, (response) => {
+              if (response.exito == true) {
+                alert('Evento Editado correctamente!')
+              } else {
+                alert('Intentelo nuevamente')
+              }
+            })
+          }
     }
 
     const Manager = new EventManager()
